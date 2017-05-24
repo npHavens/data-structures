@@ -13,6 +13,11 @@ var Queue = function() {
   };
 
   someInstance.size = function() {
+    var count = 0;
+    for(var key in storage){
+      count++;
+    }
+    return count;
   };
 
   return someInstance;
