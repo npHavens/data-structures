@@ -5,8 +5,8 @@ var Queue = function() {
 };
 
 Queue.prototype.enqueue = function(value){
-
-
+  _.each(this.storage, (val, key) => this.storage[+key + 1] = val);
+  this.storage[0] = value;
 }
 
 Queue.prototype.dequeue = function(){
