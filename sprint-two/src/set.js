@@ -30,6 +30,4 @@ setPrototype.remove = function(item) {
 //.add = O(1)
 //.contains = O(n)
 //.remove = O(1)
-
-
  */
