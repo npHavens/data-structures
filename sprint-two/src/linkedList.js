@@ -77,7 +77,6 @@ var LinkedList = function() {
     }
     list.addToTail(value);
   };
-
   return list;
 };
 
@@ -94,6 +93,8 @@ var Node = function(value) {
 //list.addToTail = O(1)
 //list.removeHead = O(1)
 //list.contains = O(n)
+//list.getNodeValue = O(n)
+//list.insertNodeAt = O(n)
 
 
 
