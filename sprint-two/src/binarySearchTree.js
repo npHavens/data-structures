@@ -1,20 +1,20 @@
 var BinarySearchTree = function(value) {
   var newTree = {'value': value, 'left': null, 'right': null };
-  console.log(JSON.stringify(newTree));
 
   newTree.insert = function(val) {
-
-    if (newTree.value < val){
+    if (newTree.value < val) {
       if (!newTree.right) {
         newTree.right = BinarySearchTree(val);
       } else {
         return newTree.right.insert(val);
       }
     }
-    if (!newTree.left) {
-      newTree.left = BinarySearchTree(val);
-    } else {
-      return newTree.left.insert(val);
+    if (newTree.value > val) {
+      if (!newTree.left) {
+        newTree.left = BinarySearchTree(val);
+      } else {
+        return newTree.left.insert(val);
+      }
     }
   // Look at the tree
   // Check if the top value is greater than or less than inserted value
@@ -28,7 +28,7 @@ var BinarySearchTree = function(value) {
   };
 
   newTree.contains = function(val) {
-    if (newTree.value === val ) {
+    if (newTree.value === val) {
       return true;
     }
     if (newTree.value > val && newTree.left) {
@@ -40,31 +40,14 @@ var BinarySearchTree = function(value) {
     return false;
   };
 
-  //   var found;
-  //   var search = function(newTree){
-  //     if(newTree === null){
-  //       found = false;
-  //     } else {
-
-  //       if (newTree.value === val) {
-  //         found = true;
-  //       } else if ( newTree.value < val){
-  //         search(newTree.right);
-  //       } else if ( newTree.value > val){
-  //         search(newTree.left);
-  //       }
-  //     }
-
-  //   };
-
-  //   search(this);
-
-  //   return found;
-  // };
-
-  newTree.depthFirstLog = function() {
-
-
+  newTree.depthFirstLog = function(callback) {
+    callback(newTree.value);
+    if (newTree.left) {
+      newTree.left.depthFirstLog(callback);
+    }
+    if (newTree.right) {
+      newTree.right.depthFirstLog(callback);
+    }
   };
 
   return newTree;
