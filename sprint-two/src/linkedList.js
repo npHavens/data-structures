@@ -46,6 +46,20 @@ var LinkedList = function() {
     return false;
   };
 
+  list.getNodeValueAt = function(n) {
+    var obj = list.head;
+    var counter = 1;
+
+    while (obj) {
+      if (counter === n) {
+        return obj.value;
+      }
+      obj = obj.next;
+      counter++;
+    }
+    return null;
+  };
+
   return list;
 };
 
