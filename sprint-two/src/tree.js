@@ -28,6 +28,27 @@ treeMethods.contains = function(target) {
   return false;
 };
 
+treeMethods.sumOfChildrenCount = function(){
+  return this.children.reduce(function(childCount, child) {
+    if (child.children.length) {
+      return childCount+= child.sumOfChildrenCount();
+    }
+    return childCount;
+  }, this.children.length);
+  // var count = this.children.length;
+  // // if(this.children.length){
+  // //   count = this.children.length;
+  // // }
+
+  // if (count) {
+  //   for( var i = 0;  i < this.children.length; i++){
+  //     count += this.children[i].sumOfChildrenCount();
+  //   }
+  // }
+
+  // return count;
+
+};
 
 
 /*
