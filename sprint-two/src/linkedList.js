@@ -60,17 +60,32 @@ var LinkedList = function() {
     return null;
   };
 
+  list.insertNodeAt = function(value, nodeNumber) {
+    var obj = list.head;
+    var counter = 1;
+    while (obj) {
+      if (counter === nodeNumber) {
+        var temp = obj.next;
+        var node = Node(value);
+        node.next = temp;
+        obj.next = node;
+        break;
+      } else {
+        counter++;
+        obj = obj.next;
+      }
+    }
+    list.addToTail(value);
+  };
+
   return list;
 };
 
 
-
 var Node = function(value) {
   var node = {};
-
   node.value = value;
   node.next = null;
-
   return node;
 };
 

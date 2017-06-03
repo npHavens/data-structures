@@ -65,5 +65,21 @@ describe('linkedList', function() {
     expect(linkedList.getNodeValueAt(4)).to.equal(null);
   });
 
+  it('should insert a node at a given point', function() {
+    linkedList.addToTail(4);
+    linkedList.addToTail(5);
+    linkedList.addToTail(6);
+    linkedList.insertNodeAt(0, 2);
+    expect(linkedList.getNodeValueAt(3)).to.equal(0);
+  });
+
+  it('should insert node at the end of the list if value is bigger than list', function() {
+    linkedList.addToTail(4);
+    linkedList.addToTail(5);
+    linkedList.addToTail(6);
+    linkedList.insertNodeAt(0, 5);
+    expect(linkedList.getNodeValueAt(4)).to.equal(0);
+  });
+
   // add more tests here to test the functionality of linkedList
 });
