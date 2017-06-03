@@ -40,13 +40,21 @@ treeMethods.sumOfChildrenCount = function(){
     }
     return childCount;
   }, this.children.length);
-
-
-
-
-
-
 };
+
+treeMethods.removeFromParent = function() {
+  var parent = this.parent;
+  for (var i = 0; i < parent.children.length; i++) {
+    if (parent.children[i].value === this.value) {
+      parent.children.splice(i,1);
+    }
+  }
+  this.parent = null;
+};
+
+
+
+
 
 
 /*
