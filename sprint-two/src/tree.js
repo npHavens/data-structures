@@ -15,22 +15,17 @@ treeMethods.addChild = function(value) {
 };
 
 treeMethods.contains = function(target) {
-
-  var traverse = function (tree){
-    if(tree.value === target) {
-      return true;
-    }
-    if(tree.children.length){
-      for (var i = 0; i < tree.children.length; i++){
-        if (traverse(tree.children[i])) {
-          return true;
-        }
+  if (this.value === target) {
+    return true;
+  }
+  if (this.children.length) {
+    for (var i = 0; i < this.children.length; i++) {
+      if (this.children[i].contains(target)) {
+        return true;
       }
     }
-    return false;
-  };
-
-  return traverse (this);
+  }
+  return false;
 };
 
 
