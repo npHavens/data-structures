@@ -4,7 +4,6 @@ var LinkedList = function() {
   list.tail = null;
 
   list.addToTail = function(value) {
-    // console.log('was', JSON.stringify(list))
     var node = Node(value);
     if(!list.head){
       list.head = node;
@@ -13,7 +12,6 @@ var LinkedList = function() {
       list.tail.next = node;
       list.tail = node;
     }
-    // console.log('now', JSON.stringify(list));
   };
 
   list.removeHead = function() {

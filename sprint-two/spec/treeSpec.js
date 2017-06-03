@@ -49,4 +49,13 @@ describe('tree', function() {
     expect(tree.sumOfChildrenCount()).to.equal(4);
   });
 
+  it('should return the parent the given node', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(7);
+    tree.children[1].addChild(8);
+    expect(tree.children[0].children[0].parent).to.equal(tree.children[0]);
+    expect(tree.children[0].parent).to.equal(tree);
+  });
+
 });
