@@ -11,10 +11,11 @@ HashTable.prototype.insert = function(k, v) {
   var bucket = this._storage.get(index);
   var tuple = [k, v];
   var newBucket = [];
-  this.size++;
+
   if (bucket) {
     newBucket = _.map(bucket, function(element, i) {
       if (bucket[i][0] === k) {
+        this.size--;
         return tuple;
       }
       return element;
@@ -22,6 +23,7 @@ HashTable.prototype.insert = function(k, v) {
   }
   newBucket.push(tuple);
   this._storage.set(index, newBucket);
+  this.size++;
   this.resize();
 };
 
@@ -50,41 +52,37 @@ HashTable.prototype.remove = function(k) {
   this.resize();
 };
 
-HashTable.prototype.resize = function(){
+HashTable.prototype.resize = function() {
   var change = this.size / this._limit;
-  //console.log(JSON.stringify(this._storage));
-  if(change > .75){
-    this._limit*=2;
-  }
-  if(change < .25){
-    this._limit*= .5;
-  }
 
+  if (change > .75) {
+    this._limit *= 2;
+    this.copy();
+  }
+  if (change < .25) {
+    this._limit *= .5;
+    this.copy();
+  }
+};
+
+HashTable.prototype.copy = function() {
   var table = this;
-  var duplicate = this.copy();
+  var tuples = [];
+
+  this._storage.each(function(bucket) {
+    if (bucket && bucket[0]) {
+      tuples = tuples.concat(bucket);
+    }
+  });
 
   this._storage = LimitedArray(this._limit);
 
-  _.each(duplicate,function(tuple){
-     //console.log(JSON.stringify(tuple));
-      //if(tuple) {
-        //table.insert(tuple[0], tuple[1]);
-      //}
+  _.each(tuples, function(tuple) {
+    table.insert(tuple[0], tuple[1]);
+    table.size--;
   });
-  //console.log(JSON.stringify(this._storage));
-
 };
 
-HashTable.prototype.copy = function(){
-  var copy = [];
-  this._storage.each(function(bucket){
-    if(bucket){
-      copy = copy.concat(bucket);
-    }
-  });
-  console.log(JSON.stringify(copy));
-  return copy;
-};
 
 /*
  * Complexity: What is the time complexity of the above function.s?
